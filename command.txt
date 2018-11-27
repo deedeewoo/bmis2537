@@ -1,0 +1,25 @@
+curl -X POST -H "Content-Type: application/json" -u "5848ff84-9ec3-44a1-8173-834fc3a81dff":"OKZ2nhLTtDG2" -d @request-sentiment-ibm.json "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2017-02-27" >> sentiment-ibm.json
+
+curl -u 0c0e2491-33a9-4758-b66d-bcb340f85c9e:gaVzbeaFo35W -X POST --header "Content-Type: audio/mp3"--header "Transfer-Encoding: chunked" --data-binary @ryan-block-comcastic-service-2014-07-14.mp3 "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize?continuous=true" | grep transcript | sed 's/.*"transcript": "\(.*\)".*/\1/g' > output-ibm1.txt
+
+        strCriteria = " Dietary_ID IN(" & Left(strCriteria, Len(strCriteria) - 1) & ")) " 'Rremove last comma
+        
+        TRANSFORM First(Nutrient_Amount) AS FirstOfFieldD
+        SELECT ID, Meal_Name, Calories, Ingredient_Score FROM (
+        SELECT a.ID, a.Meal_Name, a.Calories, a.Ingredient_Score, c.Nutrient_Name, b.Nutrient_Amount" _
+        FROM (Meal_Option AS a LEFT JOIN Meal_Nutrient AS b ON a.id = b.Meal_ID)" _
+        & "LEFT JOIN Nutrient_Option AS c ON b.Nutrient_ID = c.ID" _
+        & "WHERE a.Calories<=0.45*(select TEE from [Logedin_Student_Info]) and a.id not in (SELECT DISTINCT Meal_ID FROM Meal_Dietary "
+
+        strSQL_2 = "and a.id not in (SELECT DISTINCT Meal_ID FROM Student as s inner join Student_Meal as m on s.id =m.Student_ID" _
+        & "WHERE s.is_logon=1 and datediff('d', m.Consume_Datetime, now())<=5))  AS temp" _
+        & "GROUP BY ID, Meal_Name, Calories, Ingredient_Score" _
+        & "PIVOT Nutrient_Name;"
+        strSQL = strSQL_1 & " Where " & strCriteria & strSQL_2
+
+TRANSFORM First(Nutrient_Amount) AS FirstOfFieldD SELECT ID, Meal_Name, Calories, Ingredient_Score FROM (SELECT a.ID, a.Meal_Name, a.Calories, a.Ingredient_Score, c.Nutrient_Name, b.Nutrient_Amount FROM (Meal_Option AS a LEFT JOIN Meal_Nutrient AS b ON a.id = b.Meal_ID) LEFT JOIN Nutrient_Option AS c ON b.Nutrient_ID = c.ID WHERE a.Calories<=0.45*(select TEE from [Logedin_Student_Info]) and a.id not in (SELECT DISTINCT Meal_ID FROM Meal_Dietary  Where  Dietary_ID IN(1,2,3)) and a.id not in (SELECT DISTINCT Meal_ID FROM Student as s inner join Student_Meal as m on s.id =m.Student_ID WHERE s.is_logon=1 and datediff('d', m.Consume_Datetime, now())<=5))  AS temp GROUP BY ID, Meal_Name, Calories, Ingredient_Score PIVOT Nutrient_Name;
+
+
+
+TRANSFORM First(Nutrient_Amount) AS FirstOfFieldD SELECT ID, Meal_Name, Calories, Ingredient_Score FROM (SELECT a.ID, a.Meal_Name, a.Calories, a.Ingredient_Score, c.Nutrient_Name, b.Nutrient_Amount FROM (Meal_Option AS a LEFT JOIN Meal_Nutrient AS b ON a.id = b.Meal_ID) LEFT JOIN Nutrient_Option AS c ON b.Nutrient_ID = c.ID WHERE a.Calories<=0.45*(select TEE from [Logedin_Student_Info]) and a.id not in (SELECT DISTINCT Meal_ID FROM Meal_Dietary  Where  Dietary_ID IN(1,2,3)) and a.id not in (SELECT DISTINCT Meal_ID FROM Student as s inner join Student_Meal as m on s.id =m.Student_ID WHERE s.is_logon=1 and datediff('d', m.Consume_Datetime, now())<=5))  AS temp GROUP BY ID, Meal_Name, Calories, Ingredient_Score PIVOT Nutrient_Name;
+
